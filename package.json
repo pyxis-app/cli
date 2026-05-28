@@ -1,0 +1,45 @@
+{
+  "name": "@pyxis/cli",
+  "version": "0.0.1",
+  "description": "Pyxis on the command line — run Web3 research from your terminal. Hits usepyxis.com.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "pyxis": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "node --import=tsx/esm src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "pyxis",
+    "crypto",
+    "web3",
+    "research",
+    "cli",
+    "terminal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pyxis-app/cli.git"
+  },
+  "homepage": "https://usepyxis.com",
+  "bugs": {
+    "url": "https://github.com/pyxis-app/cli/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
