@@ -62,6 +62,16 @@ npm run build                  # emit dist/
 node dist/index.js login       # run built artifact
 ```
 
+## Related
+
+| Project | What it is |
+|---|---|
+| [usepyxis.com](https://www.usepyxis.com) | Live web app — same 5-agent pipeline, rendered briefings |
+| [docs.usepyxis.com](https://docs.usepyxis.com) | Docs site — methodology, sources, FAQ |
+| [`pyxis-app/pyxis`](https://github.com/pyxis-app/pyxis) | Main app source (AGPL-3.0) |
+| [`@pyxis-labs/web3-sources`](https://github.com/pyxis-app/web3-sources) | Sibling: typed TS clients for the 13 data sources Pyxis pulls from |
+| [@pyxisbase](https://x.com/pyxisbase) on X | Project updates, build-in-public |
+
 ## License
 
 MIT © Pyxis Authors. App itself (`pyxis-app/pyxis`) is AGPL-3.0 — this CLI is intentionally MIT so it can be embedded freely.
