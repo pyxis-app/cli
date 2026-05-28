@@ -9,21 +9,19 @@ export async function login(_args: string[]): Promise<number> {
 
   let spinner: Spinner | undefined;
   try {
-    let urlPrinted = false;
     const creds = await performLogin({
       apiBase: API_BASE,
       onUrl(url) {
-        const short = url.replace(/^https?:\/\//, "").split("?")[0] ?? url;
-        process.stdout.write(step(`Opening ${bright(short)} in browser`) + "\n");
-        urlPrinted = true;
+        process.stdout.write(step("Open this URL in your browser:") + "\n");
+        process.stdout.write(`     ${bright(url)}\n`);
+        process.stdout.write(
+          `     ${dim("(attempting to launch your default browser…)")}` + "\n\n",
+        );
       },
       onWaiting() {
         spinner = spin(`Waiting for sign-in...  ${dim("(Ctrl+C to cancel)")}`);
       },
     });
-    if (!urlPrinted) {
-      process.stdout.write(step("Opening usepyxis.com/cli-auth in browser") + "\n");
-    }
     spinner?.stop();
 
     await save(creds);
