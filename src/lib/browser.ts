@@ -17,21 +17,24 @@ function isWsl(): boolean {
 
 export async function openBrowser(url: string): Promise<{ opened: boolean }> {
   // WSL2 → reach into Windows to launch the actual user-facing browser.
+  // We deliberately use PowerShell Start-Process instead of `cmd.exe /c start`
+  // or `wslview` because cmd.exe re-parses the command line and treats `&` in
+  // a URL as a command separator, which fragments URLs like
+  // /cli-auth?state=X&port=Y&challenge=Z into multiple browser-launch attempts
+  // (one with the full URL, one with just ?state=X). Start-Process keeps the
+  // URL atomic.
   if (isWsl()) {
-    const tries: Array<[string, string[]]> = [
-      ["wslview", [url]],
-      ["cmd.exe", ["/c", "start", "", url]],
-      ["powershell.exe", ["-NoProfile", "-Command", `Start-Process "${url}"`]],
-    ];
-    for (const [cmd, args] of tries) {
-      try {
-        await execFileAsync(cmd, args);
-        return { opened: true };
-      } catch {
-        // try next
-      }
+    const safeUrl = url.replace(/"/g, '\\"');
+    try {
+      await execFileAsync("powershell.exe", [
+        "-NoProfile",
+        "-Command",
+        `Start-Process "${safeUrl}"`,
+      ]);
+      return { opened: true };
+    } catch {
+      return { opened: false };
     }
-    return { opened: false };
   }
 
   const cmd =
