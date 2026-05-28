@@ -1,6 +1,10 @@
 # `@pyxis-labs/cli`
 
-Pyxis on the command line. Run Web3 research briefings from your terminal — same 5-agent pipeline as [usepyxis.com](https://usepyxis.com).
+[![npm version](https://img.shields.io/npm/v/@pyxis-labs/cli?style=flat-square&color=3b82f6)](https://www.npmjs.com/package/@pyxis-labs/cli)
+[![license](https://img.shields.io/npm/l/@pyxis-labs/cli?style=flat-square&color=3b82f6)](https://github.com/pyxis-app/cli/blob/main/LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/pyxis-app/cli/ci.yml?branch=main&style=flat-square&color=3b82f6)](https://github.com/pyxis-app/cli/actions/workflows/ci.yml)
+
+Pyxis on the command line. Run Web3 research briefings from your terminal — same 5-agent pipeline as [usepyxis.com](https://www.usepyxis.com).
 
 ## Install
 
