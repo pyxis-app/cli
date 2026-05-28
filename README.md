@@ -1,4 +1,4 @@
-# `@pyxis/cli`
+# `@pyxis-labs/cli`
 
 Pyxis on the command line. Run Web3 research briefings from your terminal — same 5-agent pipeline as [usepyxis.com](https://usepyxis.com).
 
@@ -7,9 +7,9 @@ Pyxis on the command line. Run Web3 research briefings from your terminal — sa
 ## Install
 
 ```bash
-npm i -g @pyxis/cli
+npm i -g @pyxis-labs/cli
 # or run without install
-npx @pyxis/cli health
+npx @pyxis-labs/cli health
 ```
 
 Requires Node.js ≥ 18.17.

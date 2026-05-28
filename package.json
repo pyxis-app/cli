@@ -1,5 +1,5 @@
 {
-  "name": "@pyxis/cli",
+  "name": "@pyxis-labs/cli",
   "version": "0.0.1",
   "description": "Pyxis on the command line — run Web3 research from your terminal. Hits usepyxis.com.",
   "license": "MIT",
