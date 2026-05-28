@@ -1,6 +1,12 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { ok, fail, warn, step, meta, isColorEnabled } from "../ui.js";
 
+// Strip ANSI escapes so assertions don't depend on TTY/FORCE_COLOR detection
+// (picocolors emits codes when CI sets FORCE_COLOR even though our isColorEnabled
+// returns false — the helpers always run picocolors regardless).
+// eslint-disable-next-line no-control-regex
+const stripAnsi = (s: string) => s.replace(/\x1b\[[0-9;]*m/g, "");
+
 describe("ui status helpers", () => {
   beforeEach(() => {
     delete process.env.NO_COLOR;
@@ -8,30 +14,30 @@ describe("ui status helpers", () => {
   });
 
   it("ok wraps with green check", () => {
-    const out = ok("Logged in");
+    const out = stripAnsi(ok("Logged in"));
     expect(out).toContain("✓");
     expect(out).toContain("Logged in");
   });
 
   it("fail wraps with red x", () => {
-    const out = fail("oops");
+    const out = stripAnsi(fail("oops"));
     expect(out).toContain("✗");
     expect(out).toContain("oops");
   });
 
   it("warn uses yellow tilde", () => {
-    const out = warn("careful");
+    const out = stripAnsi(warn("careful"));
     expect(out).toContain("~");
     expect(out).toContain("careful");
   });
 
   it("step uses cyan arrow", () => {
-    const out = step("Opening browser");
+    const out = stripAnsi(step("Opening browser"));
     expect(out).toContain("→");
   });
 
   it("meta aligns label width 11", () => {
-    const out = meta("wallet", "0xabc");
+    const out = stripAnsi(meta("wallet", "0xabc"));
     expect(out).toMatch(/wallet\s+0xabc/);
   });
 
