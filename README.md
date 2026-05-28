@@ -2,8 +2,6 @@
 
 Pyxis on the command line. Run Web3 research briefings from your terminal — same 5-agent pipeline as [usepyxis.com](https://usepyxis.com).
 
-> **Status:** early scaffold (v0.0.1). Only `pyxis health` is wired up. `pyxis research` lands next once the SIWE auth flow ships.
-
 ## Install
 
 ```bash
@@ -14,22 +12,43 @@ npx @pyxis-labs/cli health
 
 Requires Node.js ≥ 18.17.
 
-## Usage
+## Quickstart
 
 ```bash
-pyxis <command> [options]
+pyxis login                           # opens browser, sign in with wallet
+pyxis research "ondo finance Q2"      # 5-agent briefing in your terminal
+pyxis status                          # check session
+pyxis logout                          # clear local credentials
 ```
 
-| Command | Status | What it does |
-|---|---|---|
-| `pyxis health` | ✅ shipped | Ping `usepyxis.com/api/health` — confirms API + DB are up |
-| `pyxis research <topic>` | 🚧 planned | Run a briefing — 5-agent pipeline against any token/chain/protocol/narrative |
+## Commands
+
+| Command | What it does |
+|---|---|
+| `pyxis login` | Browser-callback sign-in. Token saved to `~/.config/pyxis/credentials` (mode 0600). Valid 24h. |
+| `pyxis logout` | Removes local credentials. (Token remains valid server-side until natural expiry.) |
+| `pyxis status` | Shows current wallet + expiry. Exit 1 if not logged in. |
+| `pyxis research <topic>` | Runs the 5-agent research pipeline against your topic. 30-90s typical. |
+| `pyxis health` | Pings `/api/health` — confirms API + DB are up. |
+| `pyxis help`, `--version` | Self-explanatory. |
 
 ## Configuration
 
 | Env var | Default | Purpose |
 |---|---|---|
 | `PYXIS_API_BASE` | `https://usepyxis.com` | Override for self-hosted or staging |
+| `NO_COLOR` | unset | When `1`, disable all ANSI colors and the banner |
+| `PYXIS_NO_BANNER` | unset | When `1`, suppress only the login banner (keep colors) |
+| `XDG_CONFIG_HOME` | `~/.config` | POSIX credentials directory base |
+
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| 0 | Success |
+| 1 | User error (not logged in, invalid topic, token expired) |
+| 2 | Server / network error (5xx, timeout, rate-limited) |
+| 130 | Interrupted (Ctrl+C) |
 
 ## Development
 
@@ -37,9 +56,10 @@ pyxis <command> [options]
 git clone git@github.com:pyxis-app/cli.git
 cd cli
 npm install
-npm run dev -- health        # run from source via tsx
-npm run build                # emit dist/
-node dist/index.js health    # run built artifact
+npm test                       # vitest
+npm run dev -- health          # run from source via tsx
+npm run build                  # emit dist/
+node dist/index.js login       # run built artifact
 ```
 
 ## License
