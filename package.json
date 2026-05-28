@@ -1,11 +1,11 @@
 {
   "name": "@pyxis-labs/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pyxis on the command line — run Web3 research from your terminal. Hits usepyxis.com.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "pyxis": "./dist/index.js"
+    "pyxis": "dist/index.js"
   },
   "files": [
     "dist",
