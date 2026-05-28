@@ -78,4 +78,4 @@ node dist/index.js login       # run built artifact
 
 ## License
 
-MIT © Pyxis Authors. App itself (`pyxis-app/pyxis`) is AGPL-3.0 — this CLI is intentionally MIT so it can be embedded freely.
+MIT © 2026 Pyxis Authors. App itself (`pyxis-app/pyxis`) is AGPL-3.0 — this CLI is intentionally MIT so it can be embedded freely.
